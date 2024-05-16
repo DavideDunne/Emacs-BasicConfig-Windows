@@ -59,3 +59,8 @@
 (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 (global-set-key (kbd "C-x b") 'ibuffer)
 (setq ibuffer-expert t)
+
+;; Play sound on startup
+;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
+;; Samsung Windows XP startup sound
+(play-sound (list 'sound :file (expand-file-name "~/.emacs.d/media/startup_sound.wav")))
