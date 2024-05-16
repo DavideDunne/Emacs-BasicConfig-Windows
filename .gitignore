@@ -1,0 +1,13 @@
+auto-save-list/
+eln-cache/
+elpa/
+org-persist/
+tutorial/
+url/
+
+# Ignore files which extension ends with ~
+*~
+
+ido.last
+smex-items
+desktop.ini
