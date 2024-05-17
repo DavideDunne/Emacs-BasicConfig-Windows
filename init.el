@@ -64,3 +64,7 @@
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
 ;; Samsung Windows XP startup sound
 (play-sound (list 'sound :file (expand-file-name "~/.emacs.d/media/startup_sound.wav")))
+
+;; Disable creation of backup files
+;; Obtained from Xah http://xahlee.info/emacs/emacs/emacs_set_backup_into_a_directory.html
+(setq make-backup-files nil)
