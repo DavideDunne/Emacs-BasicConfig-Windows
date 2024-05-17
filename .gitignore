@@ -4,6 +4,8 @@ elpa/
 org-persist/
 tutorial/
 url/
+multisession/
+transient/
 
 # Ignore files which extension ends with ~
 *~
