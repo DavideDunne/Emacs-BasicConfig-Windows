@@ -12,3 +12,6 @@ transient/
 
 ido.last
 smex-items
+
+init.elc
+recentf

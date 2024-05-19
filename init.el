@@ -1,3 +1,6 @@
+
+(setq native-comp-async-report-warnings-errors nil)
+
 ;; This is the basic emacs config, as seen in the video by Uncle Dave https://youtu.be/8Zkte37UOnA?si=R2B3iHLMgFb9-zwL
 ;; Remove the tool bar (file, edit, etc) and menu bar (the bar with icons)
 ;; init.el, should be in ~/.emacs.d/init.el
@@ -12,7 +15,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
- '(package-selected-packages '(switch-window smex)))
+ '(package-selected-packages
+   '(company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -39,13 +43,9 @@
 ;; https://youtu.be/4ZAKItc16OE?si=vrWHSbUqSKNcsUk5
 (setq inhibit-startup-message t)
 
-;; Emacs will start in the file explorer buffer
-;; It will start in home directory, in windows it should be C:\Users\user\AppData\Roaming
-(find-file "~/")
-
 ;; Enable ido-mode, better file suggestion when C-x C-f
 ;; Obtained from Uncle Dave tutorial https://youtu.be/JWMxvY2dFYA?si=P5VLijIeK09U5NDB
-(setq ido-enable-flex-matching nil)
+(setq ido-enable-flex-matching t)
 (setq ido-create-new-buffer 'always)
 (setq ido-everywhere t)
 (ido-mode 1)
@@ -59,11 +59,6 @@
 (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 (global-set-key (kbd "C-x b") 'ibuffer)
 (setq ibuffer-expert t)
-
-;; Play sound on startup
-;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
-;; Samsung Windows XP startup sound
-(play-sound (list 'sound :file (expand-file-name "~/.emacs.d/media/startup_sound.wav")))
 
 ;; Disable creation of backup files
 ;; Obtained from Xah http://xahlee.info/emacs/emacs/emacs_set_backup_into_a_directory.html
@@ -104,3 +99,34 @@
 ;; Show line number
 ;; Obtained from https://www.emacswiki.org/emacs/LineNumbers
 (global-display-line-numbers-mode 1)
+
+;; Improve how bullets look in org-mode
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; kill all buffers
+;; Obtained from Uncle Dave https://youtu.be/crDdqZWgZw8?si=ty5RNqoJw65-qpEo
+(defun kill-all-buffers()
+  (interactive)
+  (mapc 'kill-buffer (buffer-list)))
+(global-set-key (kbd "C-M-S-k") 'kill-all-buffers)
+
+;; Make main menu nicer
+;; Obtained from Uncle Dave https://youtu.be/LB3GOLoJEws?si=DPkE4L1F1QEhNPNw
+;; use-package with package.el:
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+
+;; Auto-completion
+(use-package company
+  :ensure t
+  :init
+  (add-hook ' after-init-hook 'global-company-mode))
+
+;; Play sound on startup
+;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
+;; Samsung Windows XP startup sound
+(play-sound (list 'sound :file (expand-file-name "~/.emacs.d/media/startup_sound.wav")))
+
