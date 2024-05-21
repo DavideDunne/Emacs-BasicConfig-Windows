@@ -16,7 +16,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   '(company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
+   '(org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -124,6 +124,29 @@
   :ensure t
   :init
   (add-hook ' after-init-hook 'global-company-mode))
+
+;; RETURN will follow links in org-mode files
+;; Obtained from Reddit https://www.reddit.com/r/emacs/comments/kpoiqi/how_to_follow_links_in_orgmode_without_using_mouse/
+(setq org-return-follows-link  t)
+
+;; Use org-roam to use org-mode as a neural network
+;; Obtained from Chris Maiorama https://youtu.be/KlYctaKMixA?si=WZ0ve1Qc9qOHuUEs
+;; Obtained from System Crafters https://youtu.be/AyhPmypHDEw?si=gDCA0kejoGAWjOq7 https://systemcrafters.net/build-a-second-brain-in-emacs/getting-started-with-org-roam/
+(use-package org-roam
+  :ensure t
+  :init(setq org-roam-v2-ack t)
+  :config(org-roam-db-autosync-enable)
+  :bind(
+	:map org-mode-map("C-M-i" . completion-at-point)))
+(setq org-roam-directory (file-truename "~/org-roam"))
+(setq org-roam-completion-everywhere t)
+(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
+(global-set-key (kbd "C-c n f") 'org-roam-node-find)
+(global-set-key (kbd "C-c n i") 'org-roam-node-insert)
+
+;; Enable space in mini buffer
+;; Obtained from Reddit https://www.reddit.com/r/emacs/comments/x7ml9w/how_to_enable_spaces_in_minibuffer_especially_for/
+(define-key minibuffer-local-completion-map (kbd "SPC") 'self-insert-command)
 
 ;; Play sound on startup
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
