@@ -24,6 +24,9 @@
  ;; If there is more than one, they won't work right.
  )
 
+;;Disable auto-backup files
+(setq make-backup-files nil)
+
 ;; Add melpa package manager source
 ;; https://melpa.org/#/getting-started
 (require 'package)
