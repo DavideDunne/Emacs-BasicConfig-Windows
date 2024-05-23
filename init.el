@@ -16,7 +16,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   '(org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
+   '(ido-vertical-mode org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -52,6 +52,18 @@
 (setq ido-create-new-buffer 'always)
 (setq ido-everywhere t)
 (ido-mode 1)
+
+;; Enable ido suggestion vertically
+(use-package ido-vertical-mode
+  :ensure t
+  :init	(ido-vertical-mode 1))
+(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+
+;; enable smex for a better usage of M-x
+;; (use-package smex
+;;   :ensure t
+;;   :init (smex-initialize)
+;;   :bind("M-x" . smex))
 
 ;; Turn off windows ring sound effect
 ;; Obtained from https://emacs.stackexchange.com/questions/28906/how-to-switch-off-the-sounds
@@ -146,10 +158,17 @@
 (global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
 (global-set-key (kbd "C-c n f") 'org-roam-node-find)
 (global-set-key (kbd "C-c n i") 'org-roam-node-insert)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
-;; Enable space in mini buffer
+;; Enable SPC in mini buffer
 ;; Obtained from Reddit https://www.reddit.com/r/emacs/comments/x7ml9w/how_to_enable_spaces_in_minibuffer_especially_for/
 (define-key minibuffer-local-completion-map (kbd "SPC") 'self-insert-command)
+
+;; Implement indentation in org-mode for all lines
+;; Obtained from https://orgmode.org/manual/Hard-indentation.html
+(setq org-adapt-indentation t
+      org-hide-leading-stars t
+      org-odd-levels-only t)
 
 ;; Play sound on startup
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
