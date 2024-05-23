@@ -15,3 +15,7 @@ smex-items
 
 init.elc
 recentf
+
+.org-id-locations
+bookmarks
+org-roam.db
