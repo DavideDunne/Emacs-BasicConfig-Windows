@@ -170,6 +170,14 @@
       org-hide-leading-stars t
       org-odd-levels-only t)
 
+;;
+;; https://notxor.nueva-actitud.org/2021/07/30/configuracion-org-mode-agenda-i.html
+(setq org-agenda-files '("~/.emacs.d/org-mode/agenda.org"))
+(setq org-agenda-diary-file '("~/.emacs.d/org-mode/diary.org"))
+(setq calendar-date-style 'iso)
+(setq calendar-week-start-day 1)
+(setq org-agenda-include-diary t)
+
 ;; Play sound on startup
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
 ;; Samsung Windows XP startup sound
