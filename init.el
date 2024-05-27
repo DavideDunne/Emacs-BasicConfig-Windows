@@ -16,7 +16,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   '(ido-vertical-mode org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
+   '(org-journal ido-vertical-mode org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -119,6 +119,9 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+;; Shortcut for org-agenda
+(global-set-key (kbd "C-c a") 'org-agenda)
+
 ;; kill all buffers
 ;; Obtained from Uncle Dave https://youtu.be/crDdqZWgZw8?si=ty5RNqoJw65-qpEo
 (defun kill-all-buffers()
@@ -133,6 +136,12 @@
   :ensure t
   :config
   (dashboard-setup-startup-hook))
+(setq dashboard-items '((recents   . 10)
+                        (bookmarks . 5)
+                        (projects  . 5)
+                        (agenda    . 10)
+                        (registers . 5)))
+(setq dashboard-week-agenda t)
 
 ;; Auto-completion
 (use-package company
@@ -150,7 +159,7 @@
 (use-package org-roam
   :ensure t
   :init(setq org-roam-v2-ack t)
-  :config(org-roam-db-autosync-enable)
+  :config((org-roam-db-autosync-enable))
   :bind(
 	:map org-mode-map("C-M-i" . completion-at-point)))
 (setq org-roam-directory (file-truename "~/org-roam"))
@@ -158,7 +167,20 @@
 (global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
 (global-set-key (kbd "C-c n f") 'org-roam-node-find)
 (global-set-key (kbd "C-c n i") 'org-roam-node-insert)
-(global-set-key (kbd "C-c a") 'org-agenda)
+
+;; Too lazy to use org-roam Journal
+;; M-x org-journal-new-entry
+;; Obtained from https://github.com/bastibe/org-journal?tab=readme-ov-file#an-example-setup
+(use-package org-journal
+  :ensure t
+  :defer t
+  :init
+  ;; Change default prefix key; needs to be set before loading org-journal
+  (setq org-journal-prefix-key "C-c j ")
+  :config
+  (setq org-journal-dir "~/.emacs.d/org-mode/journal"
+        org-journal-date-format "%A, %d %B %Y"))
+
 
 ;; Enable SPC in mini buffer
 ;; Obtained from Reddit https://www.reddit.com/r/emacs/comments/x7ml9w/how_to_enable_spaces_in_minibuffer_especially_for/
@@ -170,10 +192,9 @@
       org-hide-leading-stars t
       org-odd-levels-only t)
 
-;;
+;; Org-mode agenda config
 ;; https://notxor.nueva-actitud.org/2021/07/30/configuracion-org-mode-agenda-i.html
 (setq org-agenda-files '("~/.emacs.d/org-mode/agenda.org"))
-(setq org-agenda-diary-file '("~/.emacs.d/org-mode/diary.org"))
 (setq calendar-date-style 'iso)
 (setq calendar-week-start-day 1)
 (setq org-agenda-include-diary t)
