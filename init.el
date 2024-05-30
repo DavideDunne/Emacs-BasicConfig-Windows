@@ -16,7 +16,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   '(org-journal ido-vertical-mode org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
+   '(powershell org-journal ido-vertical-mode org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -159,7 +159,7 @@
 (use-package org-roam
   :ensure t
   :init(setq org-roam-v2-ack t)
-  :config((org-roam-db-autosync-enable))
+;;  :config((org-roam-db-autosync-enable))
   :bind(
 	:map org-mode-map("C-M-i" . completion-at-point)))
 (setq org-roam-directory (file-truename "~/org-roam"))
@@ -198,6 +198,20 @@
 (setq calendar-date-style 'iso)
 (setq calendar-week-start-day 1)
 (setq org-agenda-include-diary t)
+
+;; Use powershell from shell mode
+;; Obtained from https://stackoverflow.com/questions/872510/can-i-use-powershell-in-shell-mode-for-emacs
+(defun powershell-7 (&optional buffer)
+  "Launches a powershell in buffer *powershell* and switches to it."
+  (interactive)
+  (let ((buffer (or buffer "*powershell*"))
+    (powershell-prog "C:/Program Files/PowerShell/7/pwsh.exe"))
+    (make-comint-in-buffer "shell" "*powershell*" powershell-prog)
+    (switch-to-buffer buffer)))
+
+;; Render images automatically in org-mode
+;; Obtained from https://stackoverflow.com/questions/17621495/emacs-org-display-inline-images
+(setq org-display-inline-images t)
 
 ;; Play sound on startup
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
