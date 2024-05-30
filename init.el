@@ -213,6 +213,11 @@
 ;; Obtained from https://stackoverflow.com/questions/17621495/emacs-org-display-inline-images
 (setq org-display-inline-images t)
 
+;; Jump line if line is too long in org-mode
+;; Obtained from https://emacs.stackexchange.com/questions/35266/org-mode-auto-new-line-at-80th-column
+(add-hook 'org-mode-hook #'(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
 ;; Play sound on startup
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
 ;; Samsung Windows XP startup sound
