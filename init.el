@@ -16,7 +16,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
  '(package-selected-packages
-   '(powershell org-journal ido-vertical-mode org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
+   '(elfeed powershell org-journal ido-vertical-mode org-roam company dashboard rainbow-mode rainbow-delimiters rainbow-delimeters org-bullets switch-window smex)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -201,7 +201,7 @@
 
 ;; Use powershell from shell mode
 ;; Obtained from https://stackoverflow.com/questions/872510/can-i-use-powershell-in-shell-mode-for-emacs
-(defun powershell-7 (&optional buffer)
+(defun powershell (&optional buffer)
   "Launches a powershell in buffer *powershell* and switches to it."
   (interactive)
   (let ((buffer (or buffer "*powershell*"))
@@ -217,6 +217,21 @@
 ;; Obtained from https://emacs.stackexchange.com/questions/35266/org-mode-auto-new-line-at-80th-column
 (add-hook 'org-mode-hook #'(lambda () (setq fill-column 80)))
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+;; Add RSS to Emacs
+;; Curl installed by default in Windows 10 and 11
+(use-package elfeed
+  :ensure t
+  :init (elfeed-update))
+(global-set-key (kbd "C-x w") 'elfeed)
+(setq elfeed-feeds
+      '(("https://www.informador.mx/rss/jalisco.xml" Informador)
+	("https://www.informador.mx/rss/mexico.xml" Informador)
+	("http://www.npr.org/rss/rss.php?id=1001" NPR)
+	("https://stallman.org/rss/rss.xml" Stallman)
+	("https://protesilaos.com/master.xml" Protesilaos)
+	("https://hnrss.org/frontpage" HN)
+	("https://notxor.nueva-actitud.org/rss.xml" Noxtor)))
 
 ;; Play sound on startup
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
