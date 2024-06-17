@@ -231,7 +231,11 @@
 	("https://stallman.org/rss/rss.xml" Stallman)
 	("https://protesilaos.com/master.xml" Protesilaos)
 	("https://hnrss.org/frontpage" HN)
-	("https://notxor.nueva-actitud.org/rss.xml" Noxtor)))
+	("https://notxor.nueva-actitud.org/rss.xml" Noxtor)
+	("https://feeds.feedburner.com/progarchives/reviews" ProgArchive)))
+
+;; Always export with email on org-mode
+(setq org-export-with-email t)
 
 ;; Play sound on startup
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
