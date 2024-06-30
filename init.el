@@ -237,6 +237,10 @@
 ;; Always export with email on org-mode
 (setq org-export-with-email t)
 
+;; Add I style cursor, insted of default block one
+;; https://emacs.stackexchange.com/questions/392/how-to-change-the-cursor-type-and-color
+(setq-default cursor-type 'bar) 
+
 ;; Play sound on startup
 ;; Function obtained from https://www.gnu.org/software/emacs/manual/html_node/elisp/Sound-Output.html
 ;; Samsung Windows XP startup sound
