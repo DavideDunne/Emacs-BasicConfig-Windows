@@ -232,7 +232,8 @@
 	("https://protesilaos.com/master.xml" Protesilaos)
 	("https://hnrss.org/frontpage" HN)
 	("https://notxor.nueva-actitud.org/rss.xml" Noxtor)
-	("https://feeds.feedburner.com/progarchives/reviews" ProgArchive)))
+	("https://feeds.feedburner.com/progarchives/reviews" ProgArchive)
+	("https://en.wikipedia.org/w/api.php?action=featuredfeed&feed=featured&feedformat=atom" Wikipedia))) ; https://en.wikipedia.org/wiki/Wikipedia%3aSyndication
 
 ;; Always export with email on org-mode
 (setq org-export-with-email t)
