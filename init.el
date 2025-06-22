@@ -246,3 +246,6 @@
 ;; Samsung Windows XP startup sound
 (play-sound (list 'sound :file (expand-file-name "~/.emacs.d/media/startup_sound.wav")))
 
+; when you have a region and you write something in buffer, delete region
+(delete-selection-mode 1)
+
